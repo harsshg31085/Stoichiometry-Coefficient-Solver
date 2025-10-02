@@ -898,6 +898,18 @@ class ChemicalComponentGUI:
                 text += f"  {' + '.join(reactants)} -> {' + '.join(products)}\n"
             else:
                 text += "  (No significant coefficients found)\n"
+            
+        text += "\n"
+
+        text += "ERROR ANALYSIS:\n"
+        text += "-" * 40 + '\n'
+
+        for index, mass_balance_error in enumerate(result['mass_balance_errors']):
+            text += f"Reaction {index + 1}: {mass_balance_error} kg/hr\n"
+            
+        text += "\n"
+
+        text += f"Total Error: {np.sum(result['mass_balance_errors'])} kg/hr"
         
         self.results_text.insert(tk.END, text)
 
