@@ -165,12 +165,16 @@ class StoichiometrySolver:
             row_array = [abs(coeff) for coeff in nu_matrix[row]]
             max_val = max(row_array)
             nu_matrix[row] = nu_matrix[row]/max_val
- 
+
+        reaction_extents = self.calculate_extents_vector(nu_matrix.T, participants, participant_ids)
+        mass_balance_errors = self.calculate_mass_balance_errors(nu_matrix.T, participants, participant_ids)
+
         return {
             'success': True,
             'stoichiometric_coefficients': nu_matrix.T.tolist(),
             'mass_balance_errors': mass_balance_errors,
-            'component_names': all_names
+            'component_names': all_names,
+            'mass_balance_errors': mass_balance_errors        
         }
     
     def check_mass_balance(self, coeffs, mw_values):
@@ -190,6 +194,30 @@ class StoichiometrySolver:
                 mass_sum += nu_matrix[comp_idx, r_idx] * molar_masses[comp_name]
             mass_balance_errors.append(abs(mass_sum))
         
+        return mass_balance_errors
+
+    def calculate_extents_vector(self, nu_matrix, participants, participant_ids):
+        molar_flows_list = np.array([participants[participant_ids[index]]['molar_flow'] for index in participant_ids])
+        molar_flows_vector = molar_flows_list.reshape(-1,1)
+
+        extents, residuals, rank, s = np.linalg.lstsq(nu_matrix, molar_flows_vector, rcond=None)
+        return extents
+
+    def calculate_mass_balance_errors(self, nu_matrix, participants, participant_ids):
+        mass_balance_errors = []
+        n_reactions = nu_matrix.shape[1]
+        
+        molar_masses = {name: data['mass'] for name, data in participants.items()}
+        
+        for r_idx in range(n_reactions):
+            mass_sum = 0
+            for comp_idx in range(nu_matrix.shape[0]):
+                comp_name = participant_ids[comp_idx]
+                mass_sum += nu_matrix[comp_idx, r_idx] * molar_masses[comp_name]
+            mass_balance_errors.append(abs(mass_sum))
+        
+        mass_balance_errors = [float(error) for error in mass_balance_errors]
+
         return mass_balance_errors
     
 def solve_stoichiometry(reactants, products, reactions):
