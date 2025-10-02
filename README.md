@@ -1,5 +1,46 @@
 # Stoichiometry Solver
 
+## 1. Installation
+
+### If Git is not installed:
+1. Download the zip file from the **"Code"** button on GitHub.
+2. Unzip it into your desired directory.
+3. Open **Terminal** or **PowerShell** in the folder containing `.gitignore` and `README.md`.
+4. Create a virtual environment:
+
+    ```bash
+    python -m venv virtual
+    ```
+
+5. Activate the virtual environment:
+
+    ```bash
+    ./virtual/Scripts/Activate
+    ```
+
+6. Install the required dependencies:
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+7. Run the program using:
+
+    ```bash
+    run.bat
+    ```
+
+### If Git is installed:
+1. In your desired directory, open terminal and run:
+
+    ```bash
+    git clone https://github.com/harsshg31085/Stoichiometry-Coefficient-Solver
+    ```
+
+2. Navigate inside the `Stoichiometry-Coefficient-Solver` folder.
+3. Follow the steps listed above for running the program.
+
+
 ## 1. Usage
 
 ### Information Input
