@@ -27,7 +27,7 @@
 7. Run the program using:
 
     ```bash
-    run.bat
+    python gui.py
     ```
 
 ### If Git is installed:
@@ -44,7 +44,7 @@
 ## 1. Usage
 
 ### Information Input
-- Run the **`run.bat`** file in the `Stoichiometry` folder (either by double-clicking or using the command prompt).
+- Run the **`gui.py`** file in the `Stoichiometry` folder (Using the command prompt).
 - If the program runs correctly, you will see an interface titled **Chemical Stoichiometry Manager**.
 - Enter your:
   - Total mass flow  
@@ -104,20 +104,4 @@
 
 4. **Implementation**
    - Minimization algorithm carried out using **SciPy** (v1.16.2).  
-
-## 3. Troubleshooting
-
-- In case the **`run.bat`** file does not open:
-  1. Right-click the file and open it with **Notepad**.
-  2. Replace its contents with the following:
-
-    ```bat
-    @echo off
-    "%~dp0virtual\Scripts\python.exe" "%~dp0gui.py" %*
-    pause
-    ```
-
-  3. This will allow you to see any errors when running the program and fix them.
-  4. Once the issue is resolved, you may remove the `pause` line.
-
 ---
