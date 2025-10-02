@@ -6,25 +6,13 @@
 1. Download the zip file from the **"Code"** button on GitHub.
 2. Unzip it into your desired directory.
 3. Open **Terminal** or **PowerShell** in the folder containing `.gitignore` and `README.md`.
-4. Create a virtual environment:
-
-    ```bash
-    python -m venv virtual
-    ```
-
-5. Activate the virtual environment:
-
-    ```bash
-    ./virtual/Scripts/Activate
-    ```
-
-6. Install the required dependencies:
+4. Install the required dependencies:
 
     ```bash
     pip install -r requirements.txt
     ```
 
-7. Run the program using:
+5. Run the program using:
 
     ```bash
     python gui.py
